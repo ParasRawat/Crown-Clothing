@@ -71,6 +71,8 @@ const HomePage = ()=>{
         
 
       </div>
+
+      
     </div>
   )
 }
