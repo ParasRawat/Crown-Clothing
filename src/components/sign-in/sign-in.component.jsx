@@ -1,6 +1,7 @@
 import React from 'react'
 
 import './sign-in.styles.scss'
+import FormInput from './../form-input/form-input.component'
 
 class SignIn extends React.Component{
 
@@ -19,6 +20,8 @@ class SignIn extends React.Component{
 
     }
 
+    // we can directly change state in the arrow functions 
+
     handleChange = (event)=>{
 
         const {value, name} = event.target
@@ -26,6 +29,8 @@ class SignIn extends React.Component{
         this.setState({[name]:value})
 
     }
+
+    // learning one thing about the span tags 
     render(){
         return(
             <div className="sign-in">
@@ -36,21 +41,22 @@ class SignIn extends React.Component{
 
                 <form onSubmit={this.handleSubmit}>
 
-                    <input name="email" 
+                    <FormInput name="email" 
                     type="email" 
                     value={this.state.email} 
-                    onChange={this.handleChange}
+                    handleChange={this.handleChange}
+                    label="email"
                     required/>
-                    <label>Email</label>
+                  
 
-                    <input 
+                    <FormInput 
                     name="password" 
                     type="password" 
                     value={this.state.password} 
-                    onChange={this.handleChange}
+                    label="password"
+                    handleChange={this.handleChange}
                     required/>
-                    <label>Email</label>
-
+                 
                     <input type="submit" value= "Submit Form"/>
                 </form>
             </div>
