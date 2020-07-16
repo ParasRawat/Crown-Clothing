@@ -24,6 +24,10 @@ class SignUp extends React.Component{
 
     handleSubmit = async (event) => {
         event.preventDefault();
+
+        /*
+        DESTRUCTURING THE COMPONENTS FROM OUR STATE 
+        */
         const {displayName, email, password, confirmPassword}= this.state;
 
         if(password !== confirmPassword){
@@ -31,6 +35,10 @@ class SignUp extends React.Component{
             return;
 
         }
+
+        /*
+        CREATE USER IN THE FIREBASE AUTHENTICATION WITH EMAIL AND PASSWORD AS WELL AS CREATE A PROFILE DOCUMENT AFTER 
+        */
 
         try{
             const {user} = await auth.createUserWithEmailAndPassword(email,password)
