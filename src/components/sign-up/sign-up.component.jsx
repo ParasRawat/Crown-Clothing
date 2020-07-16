@@ -18,6 +18,10 @@ class SignUp extends React.Component{
         }
     }
 
+    /**
+     * THIS METHODE WILL FIRST REGISTER THE USER USING EMAIL AND PASSWORD AND LATER CREATE A USER IN THE DOCUMENT WITH IT 
+     */
+
     handleSubmit = async (event) => {
         event.preventDefault();
         const {displayName, email, password, confirmPassword}= this.state;
