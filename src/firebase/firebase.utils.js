@@ -5,6 +5,10 @@ import 'firebase/auth'
 const config = {
 //todo
 
+/**
+ * 
+ * USE YOUR FIREBASE CREDENTIALS HERE FOR DATA PERSISTENCE 
+ */
 
 apiKey: "AIzaSyDY38cUVTaVrxu99qeLqSxZa1dK_flhHhM",
 authDomain: "crown-db-b409b.firebaseapp.com",
