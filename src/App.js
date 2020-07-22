@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Switch,Route} from 'react-router-dom'
+import {Switch,Route,Redirect} from 'react-router-dom'
 import Homepage from './pages/homepage/homepage.component'
 import Header from './components/header/header.component'
 import SignInAndSignUp from '././pages/sign-in-and-sing-up/sign-in-and-sign-up.component'
@@ -18,8 +18,9 @@ class App extends React.Component {
 
   componentDidMount(){
 
-    const {setCurrentUser} = this.props;
+    const {updateCurrentUser, currentUser} = this.props;
 
+    console.log(currentUser);
 
    this.unsubscribeFromAuth= auth.onAuthStateChanged( async userAuth =>{
 
@@ -29,7 +30,7 @@ class App extends React.Component {
         
         userRef.onSnapshot(snapShot =>{
           
-          setCurrentUser({
+          updateCurrentUser({
               id: snapShot.id,
               ...snapShot.data()
             })
@@ -41,7 +42,7 @@ class App extends React.Component {
 
     else{
 
-      setCurrentUser(userAuth)
+      updateCurrentUser(userAuth)
     }
 
     })
@@ -57,24 +58,51 @@ class App extends React.Component {
       <div>
   
     <Header />
+
+
     <Switch>
     <Route exact path="/" component={Homepage}/>
+
     <Route exact path="/shop" component={ShopPage}/>
-    <Route exact path="/signin" component={SignInAndSignUp}/>
+
+
+    <Route exact path="/signin" render={() => {
+      console.log(this.props.currentUser)
+      return this.props.currentUser==null ? <SignInAndSignUp/> : <Redirect to ='/' /> 
+    }}/>
+
     </Switch>
     </div>
   )
   }
 }
 
+/**
+ * DESTRUCTURE OF THE USER REDUCER 
+ */
+const mapStateToProps = ({user})=>{
+
+  return {
+
+    currentUser :  user.currentUser
+  }
+} 
 
 const mapDispatchToProps = (dispatch) => {
 
   return {
 
-    setCurrentUser : user => dispatch(setCurrentUser(user))
+    /**
+     * BASICALLY WE ARE SIMPLY DISPATCHING AN OBJECT ... AS AN ACTION THAT IS TO BE RECEIVED BY EACH OF THE REDUCERS 
+     */
+    updateCurrentUser : user => dispatch(setCurrentUser(user))
 
   }
 
 }
- export default connect(null, mapDispatchToProps )(App);
+ export default connect(mapStateToProps, mapDispatchToProps )(App);
+
+
+ /**
+  * CREATED A GLOBAL DISPATCH EVENT WITH PAYLOAD AS USER 
+  */

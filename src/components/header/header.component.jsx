@@ -26,7 +26,7 @@ const Header =({currentUser})=>{
                         //conditional rendering
                         currentUser? 
                         <div className="option" onClick={()=>{
-                            
+                            console.log(currentUser);
                             return auth.signOut();
                         }}>
                             SIGN OUT 
@@ -41,7 +41,11 @@ const Header =({currentUser})=>{
     )
 }
 
-const mapStateTOProps = (state)=>{
+/**
+ * 
+ *  THESE ARE THE FUNCTION THAT PROVIDE GLOBAL ACCESS TO USER STORE USING DESTRUCTURED PROPS     
+ */
+const mapStateToProps = (state)=>{
 
     return {
 
@@ -49,4 +53,4 @@ const mapStateTOProps = (state)=>{
     }
 
 }
-export default connect(mapStateTOProps)( Header)
+export default connect(mapStateToProps)(Header)
