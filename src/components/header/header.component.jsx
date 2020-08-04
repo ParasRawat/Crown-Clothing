@@ -5,7 +5,8 @@ import {auth} from './../../firebase/firebase.utils'
 import { ReactComponent as Logo} from './../../assets/crown.svg'
 import {connect} from 'react-redux'
 import CartIcon from '../cart-icon/cart-icon.component'
-const Header =({currentUser})=>{
+import CartDropdown from './../cart-dropdown/cart-dropdown.component'
+const Header =({currentUser, hidden})=>{
     return (
         <div className='header'>
             
@@ -14,6 +15,7 @@ const Header =({currentUser})=>{
             </Link>
 
             <div className='options'>
+
                 <Link className='option' to='/shop'>
                     SHOP
                 </Link>
@@ -37,6 +39,11 @@ const Header =({currentUser})=>{
                
                <CartIcon/>
             </div>
+
+            {
+                hidden?null:<CartDropdown/>
+            }
+            
         </div>
     )
 }
@@ -45,11 +52,12 @@ const Header =({currentUser})=>{
  * 
  *  THESE ARE THE FUNCTION THAT PROVIDE GLOBAL ACCESS TO USER STORE USING DESTRUCTURED PROPS     
  */
-const mapStateToProps = (state)=>{
+const mapStateToProps = ({user:{currentUser}, cart : {hidden} })=>{
 
     return {
 
-        currentUser: state.user.currentUser
+        currentUser,
+        hidden
     }
 
 }
