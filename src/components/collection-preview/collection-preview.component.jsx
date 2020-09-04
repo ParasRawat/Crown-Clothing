@@ -13,9 +13,10 @@ const CollectionPreview = ({title, items})=>{
             <div className='preview'>
             {
                 //returning an array of components 
-                items.filter((item, idx)=> idx <4 ).map(({id, ...otherItemProps})=>{
+                items.filter((item, idx)=> idx <4 )
+                .map((item)=>{
                     return(
-                        <CollectionItem key={id} {...otherItemProps}/>
+                        <CollectionItem key={item.id} item={item}/>
                          
                     )
                 })
