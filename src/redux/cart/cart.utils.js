@@ -1,4 +1,8 @@
  //UTILITY FUNCTIONS ALLOW US TO KEEP OUR FILES CLEAN AND ORGANIZE FUNCTIONS THAT WE MAY NEED IN MULTIPLE FILES IN ONE LOCATION 
+ 
+ //BYPASS THE FUNCTIONALITY OF A HASHMAP HERE
+
+ 
  export const addItemToCart = (cartItems, cartItemToAdd) =>{
      // maybe implementing the map functionality at this point 
      const existingCartItem = cartItems.find((cartItem)=> cartItem.id===cartItemToAdd.id);
