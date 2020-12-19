@@ -2,6 +2,7 @@ import React from 'react'
 import './cart-icon.styles.scss'
 import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg'
 import {connect} from 'react-redux' 
+import {selectCartItemsCount} from '../../redux/cart/cart.selectors'
 import { ToggleCartHidden } from './../../redux/cart/cart.actions'
 // Dispatch and state items are received as a prop here 
 const CartIcon = ({ToggleCartHidden, itemCount}) => {
@@ -18,14 +19,17 @@ const CartIcon = ({ToggleCartHidden, itemCount}) => {
 }
 /**
  * 
- * @param {Redux functions } param0 
+ * This part was re-rendering because of the state change, even though this area is actually not being changed 
  */
 
-const mapStateToProps = ({ cart : { cartItems } }) => {
+ 
+ /**
+  * Converting it to a memorized selector 
+  */
+const mapStateToProps = (state) => {
 
    return { 
-       itemCount : cartItems.reduce((accumulatorQuantity, cartItem) =>
-        (accumulatorQuantity+ cartItem.quantity), 0)
+       itemCount : selectCartItemsCount(state)
    }
 }
 
